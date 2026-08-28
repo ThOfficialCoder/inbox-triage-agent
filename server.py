@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from openai import OpenAI
 import json
+from tavily import TavilyClient
 
 app = Flask(__name__)
 CORS(app)
@@ -11,6 +12,8 @@ client = OpenAI(
     base_url="https://api.tokenfactory.nebius.com/v1/",
     api_key=os.environ.get("NEBIUS_API_KEY")
 )
+
+tavily_client = TavilyClient(os.environ.get("TAVILY_API_KEY"))
 
 @app.route("/triage", methods=["POST"])
 def triage():
@@ -90,6 +93,33 @@ def prioritize():
     )
 
     return jsonify({"result": response.choices[0].message.content})
+
+
+@app.route("/search-context", methods=["POST"])
+def search_context():
+    data = request.get_json()
+    receive_task = data.get("task", "")
+
+    response = tavily_client.search(
+        query=receive_task,
+        search_depth="basic"
+    )
+
+    if not response["results"]:
+            return jsonify({
+                "title": "",
+                "url": "",
+                "content": "No results found."
+            })
+
+    top_result = response["results"][0]
+    context_text = top_result["content"][:300]
+
+    return jsonify({
+        "title": top_result["title"],
+        "url": top_result["url"],
+        "content": context_text
+    })
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
