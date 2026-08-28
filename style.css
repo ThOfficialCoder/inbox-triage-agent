@@ -50,6 +50,12 @@ h1 {
   color: teal;
 }
 
+ul {
+  padding-left: 20px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .tagline {
   color: grey;
   font-style: italic;
