@@ -53,21 +53,38 @@ button.addEventListener("click", async (event) => {
   const info_objects = JSON.parse(data2.result);
   results.innerHTML = "";
 
-  p_element = document.createElement("p")
-  p_element.textContent = info_objects.summary
-  results.appendChild(p_element)
+  ul_element = document.createElement("ul");
+  ul_element.className = "task-list";
+
+  p_element = document.createElement("p");
+  p_element.className = "summary";
+
+  p_element.textContent = info_objects.summary;
+  results.appendChild(p_element);
+
+  div_element = document.createElement("div");
+  div_element.className = "conflicts";
+  p1_element = document.createElement("p");
+  p1_element.textContent = "Conflicts";
+  div_element.appendChild(p1_element);
+
+  conflicts_ul = document.createElement("ul");
 
   info_objects.ordered_tasks.forEach((element) => {
-    p_element1 = document.createElement("p");
-    p_element1.textContent = element;
-    results.appendChild(p_element1);
+    li_element = document.createElement("li");
+    li_element.textContent = element;
+    ul_element.appendChild(li_element);
   });
+  results.appendChild(ul_element);
 
   if (info_objects.conflicts.length > 0) {
     info_objects.conflicts.forEach((element) => {
-      list = document.createElement("li")
-      list.textContent = element
-      results.appendChild(list)
+      list = document.createElement("li");
+      list.textContent = element;
+      conflicts_ul.appendChild(list);
     });
+
+    div_element.appendChild(conflicts_ul);
+    results.appendChild(div_element);
   }
 });
