@@ -17,10 +17,43 @@ textarea {
   resize: vertical;
 }
 
-button {
+#submit-btn {
   margin-top: 10px;
   padding: 8px 16px;
   cursor: pointer;
+  background-color: teal;
+  color: white;
+  border-radius: 6px;
+  border: none;
+}
+
+#submit-btn:hover {
+  background-color: darkslategray;
+}
+
+.lookup-btn {
+  background-color: white;
+  color: black;
+  border-radius: 6px;
+  border: 1px solid teal;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+header {
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: bold;
+  color: teal;
+}
+
+.tagline {
+  color: grey;
+  font-style: italic;
+  font-size: 15px;
 }
 
 .summary {

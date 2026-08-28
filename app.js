@@ -1,4 +1,4 @@
-button = document.querySelector("#Button1");
+button = document.querySelector("#submit-btn");
 
 button.addEventListener("click", async (event) => {
   event.preventDefault();
@@ -83,6 +83,7 @@ button.addEventListener("click", async (event) => {
       show_results = document.createElement("div");
 
       lookup_button.textContent = "Look Up";
+      lookup_button.className = "lookup-btn";
       li_element.textContent = element;
 
       lookup_button.addEventListener("click", async (event) => {
