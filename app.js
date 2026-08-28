@@ -41,4 +41,33 @@ button.addEventListener("click", async (event) => {
     newInfo.textContent = `${element.task} - ${element.urgency} - ${element.category}`;
     results.appendChild(newInfo);
   });
+
+  const response2 = await fetch("http://127.0.0.1:5001/prioritize", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ tasks: info }),
+  });
+  const data2 = await response2.json();
+  const info_objects = JSON.parse(data2.result);
+  results.innerHTML = "";
+
+  p_element = document.createElement("p")
+  p_element.textContent = info_objects.summary
+  results.appendChild(p_element)
+
+  info_objects.ordered_tasks.forEach((element) => {
+    p_element1 = document.createElement("p");
+    p_element1.textContent = element;
+    results.appendChild(p_element1);
+  });
+
+  if (info_objects.conflicts.length > 0) {
+    info_objects.conflicts.forEach((element) => {
+      list = document.createElement("li")
+      list.textContent = element
+      results.appendChild(list)
+    });
+  }
 });
