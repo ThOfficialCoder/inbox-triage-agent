@@ -79,8 +79,28 @@ button.addEventListener("click", async (event) => {
 
     info_objects.ordered_tasks.forEach((element) => {
       li_element = document.createElement("li");
+      lookup_button = document.createElement("button");
+      show_results = document.createElement("div");
+
+      lookup_button.textContent = "Look Up";
       li_element.textContent = element;
+
+      lookup_button.addEventListener("click", async (event) => {
+        const response3 = await fetch("http://127.0.0.1:5001/search-context", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ task: element }),
+        });
+        const data3 = await response3.json();
+
+        show_results.textContent = data3.title + ": " + data3.content;
+      });
+
       ul_element.appendChild(li_element);
+      li_element.appendChild(lookup_button);
+      li_element.appendChild(show_results);
     });
     results.appendChild(ul_element);
 
