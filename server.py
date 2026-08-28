@@ -60,5 +60,36 @@ def classify():
 
     return jsonify({"result": response.choices[0].message.content})
 
+
+@app.route("/prioritize", methods=["POST"])
+def prioritize():
+    data = request.get_json()
+    get_tasks = data.get("tasks", [])
+
+    response = client.chat.completions.create(
+        model="nvidia/Nemotron-3_5-Lightning",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a productivity assistant that helps prioritize "
+                "Respond with ONLY a valid JSON object. Do not include any explanation, markdown formatting or text outside the JSON."
+                "tasks and identify scheduling conflicts. Order tasks primarily by urgency"
+                "and any deadline/time references in the task text as secondary signals. "
+                "A conflict exists when two or more tasks reference overlapping or same-day timing,"
+                "or when completing one task would reasonably prevent completing another on time."
+                "Fields: ordered_tasks (array of task strings, in priority order), conflicts "
+                "(array of short strings describing each conflict, empty array if none),"
+                "summary (one or two sentence overview). If there are no conflicts, return an empty"
+                "array for conflicts. Do no invent conflicts that aren't supported by the task data."
+            },
+            {
+                "role": "user",
+                "content": "Here is the list of sorted tasks with urgency and category: " + json.dumps(get_tasks)
+            }
+        ]
+    )
+
+    return jsonify({"result": response.choices[0].message.content})
+
 if __name__ == "__main__":
-    app.run(debug=True, port=5500)
+    app.run(debug=True, port=5001)

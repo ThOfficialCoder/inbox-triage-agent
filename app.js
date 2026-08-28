@@ -8,7 +8,7 @@ button.addEventListener("click", async (event) => {
 
   alert(textarea);
 
-  const response = await fetch("http://127.0.0.1:5500/triage", {
+  const response = await fetch("http://127.0.0.1:5001/triage", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -25,7 +25,7 @@ button.addEventListener("click", async (event) => {
     results.appendChild(newList);
   });
 
-  const response1 = await fetch("http://127.0.0.1:5500/classify", {
+  const response1 = await fetch("http://127.0.0.1:5001/classify", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
