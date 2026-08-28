@@ -11,6 +11,9 @@ button.addEventListener("click", async (event) => {
     return;
   }
 
+  button.disabled = true;
+  button.textContent = "Processing...";
+
   try {
     const response = await fetch("http://127.0.0.1:5001/triage", {
       method: "POST",
@@ -94,5 +97,8 @@ button.addEventListener("click", async (event) => {
   } catch (error) {
     results.textContent = "Something went wrong. Please try again.";
     console.log(error);
+  } finally {
+    button.textContent = "Submit";
+    button.disabled = false;
   }
 });
