@@ -100,3 +100,27 @@ ul {
 .conflicts li {
   margin-bottom: 4px;
 }
+
+.urgency_badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.urgency-high {
+  background-color: #fde2e2;
+  color: #c92a2a;
+}
+
+.urgency-medium {
+  background-color: #fff3cd;
+  color: #b8860b;
+}
+
+.urgency-low {
+  background-color: #e3f8e3;
+  color: #2b8a3e;
+}

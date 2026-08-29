@@ -69,10 +69,15 @@ button.addEventListener("click", async (event) => {
       li_element = document.createElement("li");
       lookup_button = document.createElement("button");
       show_results = document.createElement("div");
+      span_element = document.createElement("span");
 
       lookup_button.textContent = "Look Up";
       lookup_button.className = "lookup-btn";
-      li_element.textContent = element;
+
+      li_element.textContent = element.task;
+      span_element.textContent = element.urgency;
+
+      span_element.className = "urgency-badge urgency-" + element.urgency;
 
       lookup_button.addEventListener("click", async (event) => {
         const response3 = await fetch("http://127.0.0.1:5001/search-context", {
@@ -80,7 +85,7 @@ button.addEventListener("click", async (event) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ task: element }),
+          body: JSON.stringify({ task: element.task }),
         });
         const data3 = await response3.json();
 
@@ -90,6 +95,7 @@ button.addEventListener("click", async (event) => {
       ul_element.appendChild(li_element);
       li_element.appendChild(lookup_button);
       li_element.appendChild(show_results);
+      li_element.appendChild(span_element);
     });
     results.appendChild(ul_element);
 
