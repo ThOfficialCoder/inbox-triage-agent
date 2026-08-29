@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from openai import OpenAI
 import json
@@ -14,6 +14,10 @@ client = OpenAI(
 )
 
 tavily_client = TavilyClient(os.environ.get("TAVILY_API_KEY"))
+
+@app.route("/")
+def home():
+     return render_template("index.html")
 
 @app.route("/triage", methods=["POST"])
 def triage():
