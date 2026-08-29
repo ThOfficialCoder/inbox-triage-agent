@@ -24,6 +24,12 @@ button.addEventListener("click", async (event) => {
     });
     const data = await response.json();
     const tasks = JSON.parse(data.result);
+
+    if (tasks.length === 0) {
+      results.textContent = "No tasks has been specified";
+      return;
+    }
+
     results.innerHTML = "<p>Analyzing and prioritizing your tasks...</p>";
 
     const response1 = await fetch("/classify", {
