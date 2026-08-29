@@ -74,8 +74,10 @@ ul {
 }
 
 .task-list li {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
 }
 
 .conflicts {

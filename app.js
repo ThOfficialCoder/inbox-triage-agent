@@ -70,11 +70,12 @@ button.addEventListener("click", async (event) => {
       lookup_button = document.createElement("button");
       show_results = document.createElement("div");
       span_element = document.createElement("span");
+      task_text_span = document.createElement("span");
 
       lookup_button.textContent = "Look Up";
       lookup_button.className = "lookup-btn";
 
-      li_element.textContent = element.task;
+      task_text_span.textContent = element.task;
       span_element.textContent = element.urgency;
 
       span_element.className = "urgency-badge urgency-" + element.urgency;
@@ -93,9 +94,10 @@ button.addEventListener("click", async (event) => {
       });
 
       ul_element.appendChild(li_element);
+      li_element.appendChild(task_text_span);
+      li_element.appendChild(span_element);
       li_element.appendChild(lookup_button);
       li_element.appendChild(show_results);
-      li_element.appendChild(span_element);
     });
     results.appendChild(ul_element);
 
