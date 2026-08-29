@@ -26,12 +26,6 @@ button.addEventListener("click", async (event) => {
     const tasks = JSON.parse(data.result);
     results.innerHTML = "<p>Analyzing and prioritizing your tasks...</p>";
 
-    // tasks.forEach((element) => {
-    //   newList = document.createElement("li");
-    //   newList.textContent = element;
-    //   results.appendChild(newList);
-    // });
-
     const response1 = await fetch("http://127.0.0.1:5001/classify", {
       method: "POST",
       headers: {
@@ -42,12 +36,6 @@ button.addEventListener("click", async (event) => {
     const data1 = await response1.json();
     const info = JSON.parse(data1.result);
     results.innerHTML = "<p>Analyzing and prioritizing your tasks...</p>";
-
-    // info.forEach((element) => {
-    //   newInfo = document.createElement("li");
-    //   newInfo.textContent = `${element.task} - ${element.urgency} - ${element.category}`;
-    //   results.appendChild(newInfo);
-    // });
 
     const response2 = await fetch("http://127.0.0.1:5001/prioritize", {
       method: "POST",
