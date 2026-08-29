@@ -78,6 +78,19 @@ ul {
   align-items: center;
   gap: 10px;
   justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.task-list li span:first-child {
+  flex: 1;
+  min-width: 150px;
+}
+
+.task-list li > div {
+  flex-basis: 100%;
+  width: 100%;
+  margin-top: 8px;
+  margin-left: 0;
 }
 
 .conflicts {
