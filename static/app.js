@@ -15,7 +15,7 @@ button.addEventListener("click", async (event) => {
   button.textContent = "Processing...";
 
   try {
-    const response = await fetch("http://127.0.0.1:5001/triage", {
+    const response = await fetch("/triage", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@ button.addEventListener("click", async (event) => {
     const tasks = JSON.parse(data.result);
     results.innerHTML = "<p>Analyzing and prioritizing your tasks...</p>";
 
-    const response1 = await fetch("http://127.0.0.1:5001/classify", {
+    const response1 = await fetch("/classify", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +37,7 @@ button.addEventListener("click", async (event) => {
     const info = JSON.parse(data1.result);
     results.innerHTML = "<p>Analyzing and prioritizing your tasks...</p>";
 
-    const response2 = await fetch("http://127.0.0.1:5001/prioritize", {
+    const response2 = await fetch("/prioritize", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +81,7 @@ button.addEventListener("click", async (event) => {
       span_element.className = "urgency-badge urgency-" + element.urgency;
 
       lookup_button.addEventListener("click", async (event) => {
-        const response3 = await fetch("http://127.0.0.1:5001/search-context", {
+        const response3 = await fetch("/search-context", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
